@@ -16,6 +16,7 @@ import { SlideComponent } from './components/chat/slide/slide.component';
 import { HeaderComponent } from './components/chat/header/header.component';
 import { BodyComponent } from './components/chat/body/body.component';
 import { FooterComponent } from './components/chat/footer/footer.component';
+import { LoadingComponent } from './components/shared/loading/loading.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { FooterComponent } from './components/chat/footer/footer.component';
     SlideComponent,
     HeaderComponent,
     BodyComponent,
-    FooterComponent
+    FooterComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

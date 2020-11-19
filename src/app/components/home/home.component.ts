@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { UserInfoService } from 'src/app/services/user-info.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { async } from '@angular/core/testing';
 
 @Component({
   selector: 'app-home',
@@ -26,6 +24,7 @@ export class HomeComponent implements OnInit {
   color: string;
   dni: string;
   info = {};
+  loading:boolean=false;
   //-------------------------------
   forma: FormGroup;
 
@@ -48,26 +47,23 @@ export class HomeComponent implements OnInit {
   }
   //-------------------------
   guardar() {
+    this.loading=true;
+
     if (this.forma.status.toLowerCase() === 'invalid') {
       return Object.values(this.forma.controls).forEach((control) =>
         control.markAllAsTouched()
       );
     }
     this.dni = this.forma.value.dni;
-
     this.validar();
-//--------------SE REDIRECCIONA ANTES QUE LA SOLICITUD SE REALICE, Y LAS VARIABLES TOMEN SUS VALORES
-    setTimeout(() => {
-      this.router.navigate(['chat']);
-    }, 2500);
-//-----------------------------
   }
 
   validar() {
-    return this.serviceInfo.userInfoGen(this.dni).subscribe((data) => {
-      this.info = data;
-      this.serviceInfo.infoDni = this.info;
+    return this.serviceInfo.userInfoGen(this.dni).subscribe(data => {
+       this.info = data;
+       this.router.navigate(['chat']);
     });
+
   }
 
   get validValue() {
@@ -81,5 +77,11 @@ export class HomeComponent implements OnInit {
         [Validators.minLength(8), Validators.maxLength(8), Validators.required],
       ],
     });
+  }
+  //-----------------------------------------
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.serviceInfo.infoDni = this.info;
   }
 }

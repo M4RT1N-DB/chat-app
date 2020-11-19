@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -90,7 +91,7 @@ export class UserInfoService {
     console.log('servicio listo para usar');
   }
 
-  userInfoGen(dni: string) {
+  userInfoGen(dni: string):Observable<any> {
     const url = `https://apiperu.dev/api/dni/${dni}`;
     const headers = new HttpHeaders({
       Authorization:
@@ -98,6 +99,7 @@ export class UserInfoService {
     });
     return this.http.get(url, { headers });
   }
+
   cargarContactos() {
     return this.dummy;
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input,  } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { UserInfoService } from 'src/app/services/user-info.service';
 
 @Component({
@@ -7,17 +7,16 @@ import { UserInfoService } from 'src/app/services/user-info.service';
   styleUrls: ['./chat.component.css'],
 })
 export class ChatComponent implements OnInit {
-  infoUsuarios;
-  constructor(public serviceInfo:UserInfoService) { 
-    this.infoUsuarios=this.serviceInfo.infoDni;
+  
+  infoUsuarios={};
 
-    setTimeout(() => {
-        console.log(this.infoUsuarios);
+  constructor(public serviceInfo: UserInfoService) {
+    this.infoUsuarios = this.serviceInfo.infoDni;
+    console.log(this.infoUsuarios);
 
-    }, 2500);
   }
 
   ngOnInit(): void {
+   
   }
-
 }
