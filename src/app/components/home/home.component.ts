@@ -47,15 +47,17 @@ export class HomeComponent implements OnInit {
   }
   //-------------------------
   guardar() {
-    this.loading=true;
 
     if (this.forma.status.toLowerCase() === 'invalid') {
       return Object.values(this.forma.controls).forEach((control) =>
         control.markAllAsTouched()
       );
-    }
-    this.dni = this.forma.value.dni;
+    }else{
+      this.loading=true;
+      this.dni = this.forma.value.dni;
     this.validar();
+    }
+    
   }
 
   validar() {

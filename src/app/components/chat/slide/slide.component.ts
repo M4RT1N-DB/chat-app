@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { UserInfoService } from 'src/app/services/user-info.service';
 
 @Component({
@@ -7,9 +7,11 @@ import { UserInfoService } from 'src/app/services/user-info.service';
   styleUrls: ['./slide.component.css'],
 })
 export class SlideComponent implements OnInit {
+  @Input() infoUser:any={}
+  
   dataDummy = [];
   color: string;
-
+  
   constructor(private serviceInfo: UserInfoService) {
     this.dataDummy = this.serviceInfo.cargarContactos();
   }
